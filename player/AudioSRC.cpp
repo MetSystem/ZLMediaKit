@@ -1,9 +1,9 @@
-/*
- * Copyright (c) 2016 The ZLMediaKit project authors. All Rights Reserved.
+﻿/*
+ * Copyright (c) 2016-present The ZLMediaKit project authors. All Rights Reserved.
  *
  * This file is part of ZLMediaKit(https://github.com/ZLMediaKit/ZLMediaKit).
  *
- * Use of this source code is governed by MIT license that can be found in the
+ * Use of this source code is governed by MIT-like license that can be found in the
  * LICENSE file in the root of the source tree. All contributing project authors
  * may be found in the AUTHORS file in the root of the source tree.
  */
@@ -83,7 +83,7 @@ int AudioSRC::getPCMData(char *buf, int size) {
     if (_audio_cvt.len_cvt) {
         _target_buf.append(_buf.get(), _audio_cvt.len_cvt);
     }
-    if (_target_buf.size() < size) {
+    if (_target_buf.size() < (size_t)size) {
         return 0;
     }
     memcpy(buf, _target_buf.data(), size);
@@ -122,7 +122,7 @@ int AudioPlayer::getPCMChannel() {
 
 int AudioPlayer::getPCMData(char *buf, int size) {
     lock_guard<mutex> lck(_mtx);
-    if (_buffer.size() < size) {
+    if (_buffer.size() < (size_t)size) {
         return 0;
     }
     memcpy(buf, _buffer.data(), size);
